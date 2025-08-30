@@ -1,6 +1,6 @@
 name: "my workflow"
 
-on: main
+on: workflows
 
 jobs:
 terraform-job:
