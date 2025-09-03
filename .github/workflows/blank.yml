@@ -1,13 +1,20 @@
-name: "my workflow"
+name: Deploy
 
 on:
   push:
-  branch:
-    -main
+    branches:
+      - main
 
-    
 jobs:
-terraform-job:
-  runs-on: LENOVO
+  deploy:
+    runs-on: [self -hosted]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Use Secret
+        run: echo "Secret value is $MY_SECRET"
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET }}
 
   
