@@ -1,20 +1,36 @@
-name: Deploy
+name: Terraform Workflow
 
 on:
   push:
     branches:
-      - main
+      - main   # main branch pe push hone par chalega
+  pull_request:
 
 jobs:
-  deploy:
-    runs-on: [self -hosted]
+  terraform:
+    runs-on: self hosted
+
     steps:
-      - name: Checkout Code
+      # Step 1: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Use Secret
-        run: echo "Secret value is $MY_SECRET"
-        env:
-          MY_SECRET: ${{ secrets.MY_SECRET }}
+      # Step 2: Setup Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.6   # apne version ke hisaab se daalna
 
+      # Step 3: Terraform Init
+      - name: Terraform Init
+        run: terraform init
+
+      # Step 4: Terraform Plan
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+
+      # Step 5: Terraform Apply
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'   # sirf main branch pe apply hoga
+        run: terraform apply -auto-approve tfplan
   
