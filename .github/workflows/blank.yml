@@ -8,7 +8,7 @@ on:
 
 jobs:
   terraform:
-    runs-on: self hosted
+    runs-on: self-hosted   # hyphen sahi hai
 
     steps:
       # Step 1: Checkout repo
@@ -23,14 +23,13 @@ jobs:
 
       # Step 3: Terraform Init
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -input=false
 
       # Step 4: Terraform Plan
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
+        run: terraform plan -input=false -out=tfplan
 
       # Step 5: Terraform Apply
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'   # sirf main branch pe apply hoga
-        run: terraform apply -auto-approve tfplan
-  
+        run: terraform apply -input=false -auto-approve tfplan
