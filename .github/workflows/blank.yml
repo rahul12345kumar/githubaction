@@ -8,7 +8,7 @@ on:
 
 jobs:
   terraform:
-    runs-on: LENOVO   # hyphen sahi hai
+    runs-on: RAHUL   # hyphen sahi hai
 
     steps:
       # Step 1: Checkout repo
