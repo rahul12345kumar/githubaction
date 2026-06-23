@@ -1,4 +1,4 @@
-resource "azurerm_resource_group" "rg011" {
+resource "azurerm_resource_group" "rg" {
     name = "final-rg"
     location = "westus"
 }
