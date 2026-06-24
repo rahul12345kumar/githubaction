@@ -8,11 +8,11 @@ terraform {
   required_providers{
     azurerm ={
         source = "hashicorp/azurerm"
-      version = "4.31.0"
+      version = "4.75.0"
     }
   }
 }
 provider "azurerm" {
   features {}
-  subscription_id = "3bcdc0e9-b6e4-470c-86a7-c19f6b5069c8"
+  subscription_id = "3b770c7c-3dd0-4873-ab89-7c5f4695e464"
 }
