@@ -1,20 +1,29 @@
-name: CI
+name: Deploy to Azure
+
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch: null
+
 jobs:
-  build:
-    runs-on: self-hosted
+  deploy:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Run a one-line script
-        run: echo Hello, world!
-      - name: Run a multi-line script
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+      - name: Verify Login
+        run: az account show
+
+      - name: Deploy
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo "Deploy commands here"
